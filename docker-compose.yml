@@ -9,5 +9,6 @@ services:
       - /var/www/html/vendor
     environment:
         - REDIS_HOSTNAME=redis
+        - MONOLOG_STREAM=STDOUT
   redis :
     image : redis

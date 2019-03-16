@@ -11,6 +11,7 @@ namespace App;
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Monolog\Logger;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -32,6 +33,7 @@ class PingHandlerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new $requestedName($container->get(RedisFactory::class));
+
+        return new $requestedName($container->get(\Redis::class),$container->get(Logger::class));
     }
 }
