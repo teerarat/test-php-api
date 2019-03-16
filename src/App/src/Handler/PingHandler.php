@@ -15,6 +15,8 @@ class PingHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        return new JsonResponse(['ack' => time()]);
+        $redis = new \Redis();
+        $redis->connect("redis");
+        return new JsonResponse($redis->info());
     }
 }
