@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Handler\PingHandler;
+use Monolog\Logger;
 
 /**
  * The configuration provider for the App module
@@ -40,7 +41,8 @@ class ConfigProvider
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
                 PingHandler::class => PingHandlerFactory::class,
-                RedisFactory::class => RedisFactory::class,
+                \Redis::class => RedisFactory::class,
+                Logger::class => MonologFactory::class,
             ],
         ];
     }
