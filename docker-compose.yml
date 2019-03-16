@@ -1,0 +1,13 @@
+version: '2'
+services:
+  webserver:
+    build: .
+    ports:
+    - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/vendor
+    environment:
+        - REDIS_HOSTNAME=redis
+  redis :
+    image : redis
