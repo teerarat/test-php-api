@@ -13,10 +13,24 @@ use function time;
 
 class PingHandler implements RequestHandlerInterface
 {
+    /** @var \Redis  */
+    protected $redis;
+
+    /**
+     * PingHandler constructor.
+     * @param \Redis $redis
+     */
+    public function __construct(\Redis $redis)
+    {
+        $this->redis = $redis;
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $redis = new \Redis();
-        $redis->connect("redis");
-        return new JsonResponse($redis->info());
+        return new JsonResponse($this->redis->info());
     }
 }
